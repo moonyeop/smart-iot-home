@@ -1,0 +1,683 @@
+<!doctype html>
+
+<html>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        
+        <!-- awesome icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <title>온도</title>
+        <script>
+            $(document).ready(function() {
+                if("{{ temp_dict["auto_mode"] }}" == "ON") {
+                    $('#switch_automode').prop('checked', true);
+
+                }else {
+                    $('#switch_automode').prop('checked', false);
+                }
+
+                if("{{ temp_dict["button"] }}" == "ON") {
+                    $('#real').prop('checked', true);
+                    $('#status').text('에어컨이 작동중입니다');
+                }else {
+                    $('#real').prop('checked', false);
+                    $('#status').text('에어컨 정지');
+                }
+
+            });
+
+        </script>
+    </head>
+    
+    <body>
+        <div class='navbar'>
+            <ul>
+                <li><a href='/'><i class='fa fa-arrow-left'></i></a></li>
+                <li><a href='/'><i class='fa fa-home'></i></a></li>
+                <li id='title'><b>온도 및 에어컨</b></li>
+            </ul>
+        </div>
+        
+        <div class='container'>
+            <div class='row'>
+                <div class='col-12 col-m-12'>
+                    <div class='btn'>
+                        <input type='checkbox' id='real' onclick='text()'>
+                        <label><i class='fa fa-power-off'></i></label>
+                    </div>
+                    
+                    <p id='status'> 에어컨 정지 </p>
+                </div>
+            </div>
+            
+            <div class='row'>
+                <div class='col-2 col-m-0'>
+                </div>
+                
+                <div class='col-3 col-m-5'>
+                    <section>
+                        <div class='window'>
+                            <p id='cur_temp'>{{ temp_dict["current_temperature"] }}℃</p>
+                        </div>
+                    </section>
+                    <div class='caption'>
+                        <b>현 재 온 도</b>
+                    </div>
+                </div>
+                
+                <div class='col-2 col-m-2'>
+                </div>
+                
+                <div class='col-3 col-m-5'>
+                    <section>
+                        <div class='window'>
+                            <p id='set_temp'>{{ temp_dict["want_temperature"] }}℃</p>
+                        </div>
+                        <div class='tempbtn1'>
+                            <button class='hit' onclick='tempUp()'>
+                                <i class='fa fa-arrow-up'></i>
+                            </button>
+                        </div>
+                        <div class='tempbtn2'>
+                            <button class='hit' onclick='tempDown()'>
+                                <i class='fa fa-arrow-down'></i>
+                            </button>
+                        </div>
+                    </section>
+                    <div class='caption'>
+                        <b>설 정 온 도</b>
+                    </div>
+                </div>
+                
+                <div class='col-2 col-m-0'>
+                </div>
+            </div>
+            
+            <div class='row'>
+                <div class='col-12 col-m-12'>
+                    <div class='switch'>
+                        <input type='checkbox' id="switch_automode" onclick='setAutoMode()'>
+                        <label><i></i></label>
+                        <p><b>자 동 조 절 모 드</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- css -->
+        <style>
+            *, *:after, *:before {box-sizing: border-box;}
+            
+            
+             body 
+            {
+                font-family: 'NanumGothic';
+                background-color: aliceblue;
+                overflow-x: hidden;
+            }
+            /* -------------- Navbar -------------*/
+            div.navbar
+            {
+                width: 100%;
+                background-color: #bbb;
+                text-align: center;
+                color: #242424;
+                box-shadow: 
+                    0 4px 4px rgba(0, 0, 0, 0.3),
+                    0 2px 2px rgba(0, 0, 0, 0.4);
+                font-size: 20px;
+            
+                z-index: 200;
+            }
+            
+            div.navbar ul
+            {
+                list-style: none; 
+                padding: 14px 16px;
+                margin: 0px;
+            }
+            
+            div.navbar li
+            {
+                display: inline;
+            }
+            
+            div.navbar li a
+            {
+                float: left;
+            }
+            
+            div.navbar a
+            {
+                text-decoration: none;
+                color: #242424;
+            }
+                
+            div.navbar .fa
+            {
+                font-size: 28px;
+                margin-right: 15px;
+            }
+            
+            /* ----------------------- button --------------------- */   
+            p#status
+            {
+                text-align: center;
+                margin-top: 140px;
+                font-size: 30px;
+                font-weight: bold;
+                padding: 16px 32px;
+                background: lightblue;
+                background: linear-gradient(to bottom, #99e6ff 30%, #33ccff 90%);
+                border-radius: 5px;
+                box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+            }
+            
+            div.btn
+            {
+                position: relative;
+                width: 250px;
+                height: 250px;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            div.btn input
+            {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 100;
+                cursor: pointer;
+                opacity: 0;
+                
+            }
+            
+            div.btn label
+            {
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: relative;
+                color: #a5a39d;
+                font-size: 70px;
+                text-align: center;
+                line-height: 250px;
+                text-shadow: 0 2px 1px rgba(0, 0, 0, 0.25);
+                border-radius: 50%;
+                background-color: #b25244; /* fall back */
+                background: linear-gradient(#f7f2f6, #b2ac9e);
+                transition: all 0.3s ease-out;
+                z-index: -1;
+                box-shadow:
+                    inset 0 2px 3px rgba(255, 255, 255, 0.13),
+                    0 5px 8px rgba(0, 0, 0, 0.3),
+                    0 10px 4px rgba(0, 0, 0, 0.3);
+            }
+            
+            div.btn label:before
+            {
+                content: '';
+                position: absolute;
+                left: -10px;
+                right: -10px;
+                top: -10px;
+                bottom: -10px;
+                z-index: -1;
+                border-radius: inherit;
+                box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.13);
+                filter: blur(1px);
+            }
+            
+            div.btn label:after
+            {
+                content: '';
+                position: absolute;
+                left: -20px;
+                right: -20px;
+                top: -20px;
+                bottom: -20px;
+                z-index: -2;
+                border-radius: inherit;
+                box-shadow:
+                    inset 0 1px 0 rgba(255,255,255,0.1),
+                    0 1px 2px rgba(0,0,0,0.3),
+                    0 0 10px rgba(0,0,0,0.15);  
+            }
+            
+            div.btn .fa-power-off:after
+            {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 70%;
+                height: 70%;
+                left: 50%;
+                top: 50%;
+                z-index: -1;
+                margin: -35% 0 0 -35%;
+                border-radius: 50%;
+                background-color: #d2cbc3; /* fall back */
+                background: linear-gradient(#cbc7bc, #d2cbc3);
+                box-shadow:
+                    0 -2px 5px rgba(255, 255, 255, 0.05),
+                    0 2px 5px rgba(255, 255, 255, 0.1);
+                filter: blur(1px);
+            }
+            
+            div.btn input:checked ~ label
+            {
+                color: #9abb82;
+                box-shadow:
+                    inset 0 2px 3px rgba(255, 255, 255, 0.13),
+                    0 5px 8px rgba(0, 0, 0, 0.35),
+                    0 3px 10px 4px rgba(0, 0, 0, 0.2);
+            }
+            
+            /* --------------------- section ---------------------*/
+            section
+            {
+                width: 100%;
+                height: 150px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                box-shadow:
+                    0px 4px 10px rgba(0, 0, 0, 0.24),
+                    0px 1px 6px rgba(0, 0, 0, 0.3);
+                    
+                transition: all 0.3s ease;
+                padding: 15px;
+                display: block;
+                background: linear-gradient(to bottom right, #EAEAEA 35%, #C6C6C6 80%);
+            }
+            
+            section:hover
+            {
+                background-color: rgba(0, 0, 0, 0.08);  
+            }
+            
+            div.window
+            {
+                position: relative;
+                top: 50%;
+                width: 50%;
+                height: 80%;;
+                display: block;
+                border: 1px solid rgba(0, 0, 0, 0.3);
+                border-radius: 2px;
+                transform: translateY(-50%);
+                background: linear-gradient(to bottom right, rgba(255, 255, 255, 1) 35%, rgba(255, 255, 255, 0.5) 70%);
+                box-shadow: 
+                    0px 2px 4px rgba(0, 0, 0, 0.1),
+                    inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                font-size: 30px;
+            }
+            
+            div.caption
+            {
+                position: relative;
+                width: 100%;
+                height: 50px;
+                text-align: center;
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            div.tempbtn1
+            {
+                position: absolute;
+                left: 55%;
+                bottom: 30%;
+                width: 20%;
+                height:40%;
+                border: 1px solid rgba(0, 0, 0, 0.3);
+                background: linear-gradient(to bottom right, rgba(255, 255, 255, 1) 35%, rgba(255, 255, 255, 0.5) 70%);
+                box-shadow:
+                    0 3px 4px rgba(0, 0, 0, 0.12),
+                    0 1px 2px rgba(0, 0, 0, 0.24);
+                transition: all 0.1s ease;
+                z-index: -2;
+            }
+            
+            div.tempbtn2
+            {
+                position: absolute;
+                left: 77%;
+                bottom: 30%;
+                width: 20%;
+                height:40%;
+                border: 1px solid rgba(0, 0, 0, 0.3);
+                background: linear-gradient(to bottom right, rgba(255, 255, 255, 1) 35%, rgba(255, 255, 255, 0.5) 70%);
+                box-shadow:
+                    0 3px 4px rgba(0, 0, 0, 0.12),
+                    0 1px 2px rgba(0, 0, 0, 0.24);
+                transition: all 0.1s ease;
+                z-index: -2;
+            }
+            
+            button.hit
+            {
+                width: 100%;
+                height:100%;
+                background-color: rgba(0, 0, 0, 0);
+                border: none;
+                z-index: 2;
+            }
+            
+            div.tempbtn1:active, div.tempbtn2:active
+            {
+                transform: translateY(2px);
+                box-shadow:
+                    0 1px 2px rgba(0, 0, 0, 0.6);
+            }
+            
+            .fa-arrow-up, .fa-arrow-down
+            {
+                position:absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 26px;
+                text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+                z-index: -1;
+            }
+            
+            /* ---------------------------switch ------------------*/
+            div.switch
+            {   margin-top: 40px;
+                width: 250px;
+                height: 70px;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            div.switch input
+            {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 100;
+                cursor: pointer;
+                opacity: 0;
+            }
+            
+            div.switch label
+            {
+                display: block;
+                width: 100%;
+                height: 100%;
+                position: relative;
+                background-color: #a5a39d;
+                border-radius: 40px;
+                box-shadow:
+                    inset 0 3px 8px 1px rgba(0, 0, 0, 0.2),
+                    0 1px 0 rgba(255, 255, 255, 0.5);
+                transition: all 0.5 ease;
+            }
+            
+            div.switch label:after 
+            {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                top: -8px; right: -8px; bottom: -8px; left: -8px;
+                border-radius: inherit;
+                background: #ccc; /* Fallback */
+                background: linear-gradient(#f2f2f2, #ababab);
+                box-shadow: 0 0 10px rgba(0,0,0,0.3),
+                    0 1px 1px rgba(0,0,0,0.25);
+            }
+            
+            div.switch label:before 
+            {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                top: -18px; right: -18px; bottom: -18px; left: -18px;
+                border-radius: inherit;
+                background: #eee; /* Fallback */
+                background: linear-gradient(#e5e7e6, #eee);
+                box-shadow: 0 1px 0 rgba(255,255,255,0.5);
+                -webkit-filter: blur(1px); /* Smooth trick */
+                filter: blur(1px); /* Future-proof */
+            }
+            
+            div.switch label i 
+            {
+                display: block;
+                height: 100%;
+                width: 60%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 2;
+                border-radius: inherit;
+                background: #b2ac9e; /* Fallback */
+                background: linear-gradient(#f7f2f6, #b2ac9e);
+                box-shadow:
+                    inset 0 1px 0 white,
+                    0 0 8px rgba(0,0,0,0.3),
+                    0 5px 5px rgba(0,0,0,0.2);
+            }
+            
+            div.switch label i:after 
+            {
+                content: "";
+                position: absolute;
+                left: 15%;
+                top: 25%;
+                width: 70%;
+                height: 50%;
+                background: #d2cbc3; /* Fallback */
+                background: linear-gradient(#cbc7bc, #d2cbc3);
+                border-radius: inherit;
+            }
+            
+            div.switch label i:before 
+            {
+                content: "off";
+                position: absolute;
+                top: 50%;
+                right: -50%;
+                margin-top: -12px;
+                color: #666; /* Fallback */
+                color: rgba(0,0,0,0.4);
+                font-style: normal;
+                font-weight: bold;
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 24px;
+                text-transform: uppercase;
+                text-shadow: 0 1px 0 #bcb8ae, 0 -1px 0 #97958e;
+            }
+            
+            div.switch input:checked ~ label 
+            { /* Background */
+                background: #9abb82;
+            }
+
+            div.switch input:checked ~ label i 
+            { /* Toggle */
+                left: auto;
+                right: -1%;
+            }
+
+            div.switch input:checked ~ label i:before 
+            { /* On/off */
+                content: "on";
+                right: 115%;
+                color: #82a06a;
+                text-shadow: 0 1px 0 #afcb9b, 0 -1px 0 #6b8659;
+            }
+            
+            div.switch p
+            {
+                text-align: center;
+                font-size: 16px
+            }
+            /* ---------------- responsive ----------------------*/
+            .row::after
+            {
+                content: '';
+                clear: both;
+                display: table;
+            }
+            
+            [class*='col-']
+            {
+                float: left;
+                padding: 15px;
+                width: 100%;
+            }
+            
+            /* For Tablet */
+            @media only screen and (min-width: 600px)
+            {
+                .col-m-1 {width: 8.33%;}
+                .col-m-2 {width: 16.66%;}
+                .col-m-3 {width: 25%;}
+                .col-m-4 {width: 33.33%;}
+                .col-m-5 {width: 41.66%;}
+                .col-m-6 {width: 50%;}
+                .col-m-7 {width: 58.33%;}
+                .col-m-8 {width: 66.66%;}
+                .col-m-9 {width: 75%;}
+                .col-m-10{width: 83.33%;}
+                .col-m-11{width: 91.66%;}
+                .col-m-12{width: 100%;}
+            }
+            
+            /* For Desktop */
+            @media only screen and (min-width: 768px)
+            {
+                .col-1 {width: 8.33%;}
+                .col-2 {width: 16.66%;}
+                .col-3 {width: 25%;}
+                .col-4 {width: 33.33%;}
+                .col-5 {width: 41.66%;}
+                .col-6 {width: 50%;}
+                .col-7 {width: 58.33%;}
+                .col-8 {width: 66.66%;}
+                .col-9 {width: 75%;}
+                .col-10{width: 83.33%;}
+                .col-11{width: 91.66%;}
+                .col-12{width: 100%;}
+            }
+        </style>
+        
+        <!-- javascript -->
+        <script>
+            function setTemp(want_temp)
+            {
+                var uri = "/temperature/set_temp";
+
+                var user_name = "jong";
+
+                var temp_data = {
+                    "device_id": "temp1",
+                    "user_name": "jong",
+                    "want_temp": want_temp
+                }
+
+                $.ajax({
+                    type:"POST",
+                    url: uri,
+                    contentType:'application/json',
+                    data:JSON.stringify(temp_data),
+                    success: function(result) {
+                    }
+
+                });
+            }
+
+
+            function tempUp()
+            {
+                var temp = document.getElementById('set_temp').innerHTML;
+                
+                temp = parseInt(temp);
+                
+                if(temp < 28)
+                {
+                    temp += 1;
+                    document.getElementById('set_temp').innerHTML = temp + '℃';
+                    setTemp(temp);
+                }
+            }
+            
+            function tempDown()
+            {
+                var temp = document.getElementById('set_temp').innerHTML;
+                
+                temp = parseInt(temp);
+                
+                if(temp > 18)
+                {
+                    temp -= 1;
+                    document.getElementById('set_temp').innerHTML = temp + '℃';
+                    setTemp(temp);
+                }
+            }
+            
+            function text()
+            {
+                var is_checked = document.getElementById('real').checked;
+                
+                if(is_checked == false)
+                    document.getElementById('status').innerHTML = '에어컨 정지';
+                else
+                    document.getElementById('status').innerHTML = '에어컨이 작동중입니다';
+
+                var uri = "/temperature/button";
+
+                var user_name = "jong";
+
+                var temp_data = {
+                    "device_id": "temp1",
+                    "user_name": "jong",
+                    "is_checked": is_checked
+                }
+
+                $.ajax({
+                    type:"POST",
+                    url: uri,
+                    contentType:'application/json',
+                    data:JSON.stringify(temp_data),
+                    success: function(result) {
+                    }
+
+                });
+            }
+
+            function setAutoMode()
+            {
+                var is_checked = document.getElementById('switch_automode').checked;
+
+                var uri = "/temperature/auto_mode";
+                var user_name = "jong";
+
+                var temp_data = {
+                    "device_id": "temp1",
+                    "user_name": "jong",
+                    "is_checked": is_checked
+                }
+
+                $.ajax({
+                    type:"POST",
+                    url: uri,
+                    contentType:'application/json',
+                    data:JSON.stringify(temp_data),
+                    success: function(result) {
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

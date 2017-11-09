@@ -1,0 +1,118 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+        <title></title>
+    </head>
+
+    <body>
+        <div id='sidenav1' class='sidenav'>
+            <span style='font-size: 30px; position: absolute; right: 20px; top: 10px; cursor: pointer;' onclick='closeNav()'>&times;</span>
+            <a href='/admin' style='color:#326be5; font-weight: bold'>Home</a>
+            <a href='/admin/temperature'>Temperature</a>
+            <a href='/admin/gas'>Gas&nbsp;Detector</a>
+            <a href='/admin/lights'>Lights</a>
+            <a href='/admin/doorlock'>Doorlock</a>
+            <a href='/admin/power'>Power&nbsp;Manager</a>
+        </div>
+        <!-- Css & Javascript -->
+        <style>
+            *, *:after, *:before
+            {
+                box-sizing: border-box;
+            }
+
+            .h
+            {
+                text-align: center;
+                border-bottom: solid 3px #b7261f;
+                margin-bottom: 80px;
+                width: 80%;
+                left: 50%;
+                transform: translateX(-50%);
+                display: block;
+                position: relative;
+            }
+
+            .article
+            {
+                position: relative;
+                float: left;
+                width: 50%;
+                padding: 20px;
+            }
+
+            .image
+            {
+                float: left;
+                width: 50%;
+                padding: 20px;
+            }
+
+            .sidenav
+            {
+                width: 250px;
+                background-color: #111;
+                height: 100%;
+                position: fixed;
+                z-index: 1;
+                overflow-x: hidden;
+                top: 0;
+                left: 0;
+                padding-top: 100px;
+                transition: 0.5s;
+            }
+
+            .sidenav a
+            {
+                text-decoration: none;
+                color: #ccc;
+                padding: 8px 8px 8px 32px;
+                display: block;
+                font-size: 24px;
+                transition: 0.3s;
+            }
+
+            .sidenav a:hover
+            {
+                color: #87c6ed;
+            }
+
+            .sidenav span
+            {
+                color: #ccc;
+                transition: 0.3s;
+
+            }
+
+            .sidenav span:hover
+            {
+                color: #87c6ed;
+            }
+
+            #main
+            {
+                margin-left: 250px;
+                padding: 16px;
+                transition: margin-left 0.5s;
+            }
+        </style>
+
+        <script>
+            function openNav()
+            {
+                document.getElementById('main').style.marginLeft = '250px';
+                document.getElementById('sidenav1').style.width = '250px';
+            }
+
+            function closeNav()
+            {
+                document.getElementById('main').style.marginLeft = '0px';
+                document.getElementById('sidenav1').style.width = '0';
+            }
+        </script>
+    </body>
+</html>

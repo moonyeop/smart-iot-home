@@ -1,0 +1,306 @@
+<!doctype html>
+
+<html>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        
+        <!-- awesome icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <title>전력량</title>
+    </head>
+    
+    <body>
+        <div class='navbar'>
+            <ul>
+                <li><a href='/'><i class='fa fa-arrow-left'></i></a></li>
+                <li><a href='/'><i class='fa fa-home'></i></a></li>
+                <li id='title'><b>전력량 체크</b></li>
+            </ul>
+        </div>
+        
+        <div class='row'>
+            <div class='col-8 col-m-12'>
+                <div class='pbox'>
+                    <p style='font-weight: bold; text-align: center;'>이번 달 누적 전력량 : 244kwh</p>
+                </div>
+            </div>
+            
+            <div class='col-4 col-m-0'>
+            </div>
+        </div>
+        
+        <div class='row'>
+            <div class='col-8 col-m-12'>
+                <div class='graphbox'>
+                    <span id='one'>
+                        <p style='padding: 4px; margin: 0; text-align: center; font-weight: bold'>12.01 - 12.10</p>
+                    </span>
+                    <p style='color: white; position: absolute; left: 75%; top: 30px;'>100 kwh</p>
+                    
+                    <span id='two'>
+                        <p style='padding: 4px; margin: 0; text-align: center; font-weight: bold'>12.11 - 12.20</p>
+                    </span>
+                    <p style='color: white; position: absolute; left: 45%; top: 170px;'>58 kwh</p>
+                    
+                    
+                    <span id='three'>
+                        <p style='padding: 4px; margin: 0; text-align: center; font-weight: bold'>12.21 - 12.30</p>
+                    </span>
+                    
+                    <p style='color: white; position: absolute; left: 85%; top: 320px;'>118 kwh</p>
+                    
+                </div>
+            </div>
+            
+            <div class='col-4 col-m-0'>
+                <a href='/energy/product'>
+                    <div id='product'>
+                        <p>제품 별 전력량</p>
+                    </div>
+                </a>
+                
+                <a href='/energy/total'>
+                    <div id='total'>
+                        <p>전력량 조회</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- css -->
+        <style>
+             *, *:after, *:before {box-sizing: border-box;}
+            
+            body 
+            {
+                font-family: 'NanumGothic';
+                background-color: aliceblue;
+                overflow-x: hidden;
+                
+            }
+            
+            /* buttons */
+            a
+            {
+                text-decoration: none;
+            }
+            
+            a:active
+            {
+                color: black;
+            }
+            
+            a:enabled
+            {
+                color: black;
+            }
+            
+            a:hover
+            {
+                color: darkblue;
+            }
+            /* panels */
+            div#product
+            {
+                position: relative;
+                width: 100%;
+                height  : 100px;
+                background: linear-gradient(to bottom, #b3ffb3 30% , #33ff33 90%);
+                box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
+                border-radius: 5px;
+            }
+            
+            div#product p, div#total p
+            {
+                text-align: center;
+                padding: 40px 32px;
+                font-weight: bold;
+                
+            }
+            
+            div#total
+            {
+                position: relative;
+                width: 100%;
+                height: 100px;
+                top: 30px;
+                background: linear-gradient(to bottom, #b3ffb3 30% , #33ff33 90%);
+                box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.4);
+                border-radius: 5px;
+            }
+            
+            /* graph */
+            div.pbox
+            {
+                position: relative;
+                width: 100%;
+                height: 70px;
+                padding: 10px 32px;
+                background: lightgreen;
+                border-radius: 10px;
+                box-shadow:
+                    0px 5px 10px rgba(0, 0, 0, 0.32);
+            }
+            
+            div.graphbox
+            {
+                position: relative;
+                width: 100%;
+                height: 400px;
+                background: #1E1E20;
+                border-radius: 10px;
+                box-shadow:
+                    0 5px 10px rgba(0, 0, 0, 0.32),
+                    0 0 1px 8px rgba(0, 0, 0, 0.5);
+            }
+            
+            span#one
+            {
+                width: 70%;
+                height: 30px;
+                background: linear-gradient(#4ddbff, #008fb3);
+                position: absolute;
+                border-radius:  3px;
+                box-shadow: 
+                    0px 3px 5px rgba(255, 255, 255, 0.2),
+                    3px 0 5px rgba(255, 255, 255, 0.2),
+                    -3px 0 5px rgba(255, 255, 255, 0.2),
+                    0 -3px 5px rgba(255, 255, 255, 0.2);
+                
+                top: 40px; left: 10px;
+            }
+            
+            span#two
+            {
+                width: 40%;
+                height: 30px;
+                background: linear-gradient(#4ddbff, #008fb3);
+                position: absolute;
+                border-radius:  3px;
+                box-shadow: 
+                    0px 3px 5px rgba(255, 255, 255, 0.2),
+                    3px 0 5px rgba(255, 255, 255, 0.2),
+                    -3px 0 5px rgba(255, 255, 255, 0.2),
+                    0 -3px 5px rgba(255, 255, 255, 0.2);
+                
+                top: 180px; left: 10px;
+            }
+            
+            span#three
+            {
+                width: 80%;
+                height: 30px;
+                background: linear-gradient(#4ddbff, #008fb3);
+                position: absolute;
+                border-radius:  3px;
+                box-shadow: 
+                    0px 3px 5px rgba(255, 255, 255, 0.2),
+                    3px 0 5px rgba(255, 255, 255, 0.2),
+                    -3px 0 5px rgba(255, 255, 255, 0.2),
+                    0 -3px 5px rgba(255, 255, 255, 0.2);
+                
+                top: 330px; left: 10px;
+            }
+            /* ---------------- navbar --------------*/
+            div.navbar
+            {
+                width: 100%;
+                background-color: #bbb;
+                text-align: center;
+                color: #242424;
+                box-shadow: 
+                    0 4px 4px rgba(0, 0, 0, 0.3),
+                    0 2px 2px rgba(0, 0, 0, 0.4);
+                font-size: 20px;
+            }
+            
+            div.navbar ul
+            {
+                list-style: none; 
+                padding: 14px 16px;
+                margin: 0px;
+            }
+            
+            div.navbar li
+            {
+                display: inline;
+            }
+            
+            div.navbar li a
+            {
+                float: left;
+            }
+            
+            div.navbar a
+            {
+                text-decoration: none;
+                color: #242424;
+            }
+                
+            div.navbar .fa
+            {
+                font-size: 28px;
+                margin-right: 15px;
+            }
+            
+            /* responsive wep */
+            
+             .row::after
+            {
+                content: '';
+                clear: both;
+                display: table;
+            }
+            
+            [class*='col-']
+            {
+                float: left;
+                padding: 15px;
+                width: 100%;
+            }
+            
+            /* For Tablet */
+            @media only screen and (min-width: 600px)
+            {
+                .col-m-1 {width: 8.33%;}
+                .col-m-2 {width: 16.66%;}
+                .col-m-3 {width: 25%;}
+                .col-m-4 {width: 33.33%;}
+                .col-m-5 {width: 41.66%;}
+                .col-m-6 {width: 50%;}
+                .col-m-7 {width: 58.33%;}
+                .col-m-8 {width: 66.66%;}
+                .col-m-9 {width: 75%;}
+                .col-m-10{width: 83.33%;}
+                .col-m-11{width: 91.66%;}
+                .col-m-12{width: 100%;}
+            }
+            
+            /* For Desktop */
+            @media only screen and (min-width: 768px)
+            {
+                .col-1 {width: 8.33%;}
+                .col-2 {width: 16.66%;}
+                .col-3 {width: 25%;}
+                .col-4 {width: 33.33%;}
+                .col-5 {width: 41.66%;}
+                .col-6 {width: 50%;}
+                .col-7 {width: 58.33%;}
+                .col-8 {width: 66.66%;}
+                .col-9 {width: 75%;}
+                .col-10{width: 83.33%;}
+                .col-11{width: 91.66%;}
+                .col-12{width: 100%;}
+            }
+        </style>
+        
+        <!-- javascript -->
+        <script>
+        </script>
+        
+    </body>
+    
+</html>

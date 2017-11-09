@@ -1,0 +1,48 @@
+https://cjh5414.github.io/ubuntu-pyenv-virtualenv/
+
+##pyenv 설치 이전
+
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+xz-utils tk-dev
+
+##pyenv 설치
+
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+
+source ~/.bashrc
+
+pyenv install 3.5.2
+
+pyenv shell 3.5.2
+
+
+##pyenv-virtualenv 설치
+
+git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+
+source ~/.bashrc
+
+pyenv virtualenv 3.5.2 test-env
+
+pyenv activate test-env
+python -V
+pyenv deactivate
+
+
+##autoenv 설치
+git clone git://github.com/kennethreitz/autoenv.git ~/.autoenv
+echo 'source ~/.autoenv/activate.sh' >> ~/.bashrc
+source ~/.bashrc
+
+mkdir test-dir
+cd test-dir
+touch .env
+echo "pyenv activate iot-env" > .env
+cd test-dir/

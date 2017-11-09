@@ -1,0 +1,152 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <title>power</title>
+    </head>
+
+    <body>
+        {% include 'admin/sidebar.html' %}
+        <div id='main'>
+            <span style='font-size: 28px; cursor: pointer;' onclick='openNav()'>&#9776;</span>
+
+            <div class='header'>
+                <div class='h'>
+                    <h1>IoT Smart Home System Service</h1>
+                </div>
+
+            </div>
+
+            <div class='body'>
+                <div id='daily'>
+                    <h2>10월 사용 전력량 (단위: kwh)<a href='#'><i class='fa fa-calendar-o'></i></a></h2>
+                    <canvas id='day'></canvas>
+
+                    <h2>전기세 : 55,080 원</h2>
+                </div>
+
+                <div id='monthly'>
+                    <h2>2017년 사용 전력량 (단위: kwh)<a href='#'><i class='fa fa-calendar-o'></i></a></h2>
+                    <canvas id='month'></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Css & Javascript -->
+        <style>
+            *, *:after, *:before
+            {
+                box-sizing: border-box;
+            }
+            i
+            {
+                text-decoration: none;
+                color: black;
+                position: absolute;
+                right: 30px;
+                color: darkslategray;
+            }
+
+            div#daily
+            {
+                display: block;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                margin-bottom : 60px;
+                text-align: center;
+            }
+
+            div#monthly
+            {
+                display: block;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                margin-bottom : 30px;
+                text-align: center;
+
+            }
+            
+            .h
+            {
+                text-align: center;
+                border-bottom: solid 3px #b7261f;
+                margin-bottom: 80px;
+                width: 80%;
+                left: 50%;
+                transform: translateX(-50%);
+                display: block;
+                position: relative;
+            }
+
+            #main
+            {
+                margin-left: 250px;
+                padding: 16px;
+                transition: margin-left 0.5s;
+            }
+        </style>
+
+        <script>
+            var ctx_day = document.getElementById('day').getContext('2d');
+            var ctx_month = document.getElementById('month').getContext('2d');
+            var chart_day = new Chart(ctx_day, {
+                type: 'bar',
+
+                data: {
+                    labels: ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th",  "16th", "17th", "18th", "19th", "20th", "21th", "22th", "23th", "24th", "25th", "26th", "27th", "28th", "29th", "30th", "31th"],
+
+                    datasets: [{
+                        label: "일 전력량",
+                        backgroundColor: 'rgb(255,99,132)',
+                        borderColor: 'rgb(255,99,132)',
+                        data: {{ daily_list }},
+                    }]
+                },
+
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                suggestedMin: 0
+                            }
+                                }]
+                    }
+                }
+            });
+
+            var chart_month = new Chart(ctx_month, {
+                type: 'bar',
+
+                data: {
+                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+
+                    datasets: [{
+                        label: "월 전력량",
+                        backgroundColor: 'lightblue',
+                        data: {{ monthly_list }},
+                    }]
+                },
+
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                suggestedMin: 0
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+
+    </body>
+</html>

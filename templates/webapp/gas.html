@@ -1,0 +1,327 @@
+<!doctype html>
+
+<html>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>가스</title>
+    </head>
+    
+    <body>
+        <div class='navbar'>
+            <ul>
+                <li><a href='/'><i class='fa fa-arrow-left'></i></a></li>
+                <li><a href='/'><i class='fa fa-home'></i></a></li>
+                <li id='title'><b>가 스</b></li>
+            </ul>
+        </div>
+        
+        <div class='container'>
+            <div class='row'>
+                <div class='col-12 col-m-12'>
+                    <div class='switch'>
+                        <input type='checkbox' onclick='myFunction()'>
+                        <label><i></i></label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class='row'>
+                <div class='col-5 col-m-3'>
+                </div>
+                <div class='col-2 col-m-6'>
+                    <div>
+                        <p id='status'><b>가 스 ON</b></p>
+                    </div>
+                </div>
+                <div class='col-5 col-m-3'>
+                </div>
+            </div>
+            
+            <div class='row'>
+                <div class='col-3 col-m-1'>
+                </div>
+                
+                <div class='col-6 col-m-10'>
+                    <div id='gasscan'>
+                        가스가 새는지 감지중입니다
+                    </div>
+                </div>
+                
+                <div class='col-3 col-m-1'>
+                </div>
+            </div>
+        </div>
+        <!-- css -->
+        <style>
+         *, *:after, *:before {box-sizing: border-box;}
+            body 
+            {
+                font-family: 'NanumGothic';
+                background-color: aliceblue;
+                overflow-x: hidden;
+                
+            }
+            
+            div#gasscan
+            {
+                border-radius: 5px;
+                position: relative;
+                top: 100px;
+                text-align: center;
+                font-weight: bold;
+                background-color: #AFE1FF;
+                padding: 16px;
+                box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+            }
+            
+            /* --------------- switch----------------*/
+            div.switch input
+            {
+                position: absolute;
+                display: block;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                z-index: 1;
+                cursor: pointer;
+            }
+            
+            div.switch
+            {
+                width: 250px;
+                height: 250px;
+                position: relative;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            div.switch label
+            {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background-color: lightblue;
+                z-index: -1;
+                background: linear-gradient(#f7f2f6, #b2ac9e);
+                box-shadow:
+                    inset 0 2px 3px rgba(255, 255, 255, 0.13),
+                    0 3px 8px rgba(0, 0, 0, 0.4);
+                transition: all 0.3s ease;
+            }
+            
+            div.switch label:after
+            {
+                content: '';
+                position: absolute;
+                left: -10px;
+                right: -10px;
+                top: -10px;
+                bottom: -10px;
+                z-index: -1;
+                border-radius: inherit;
+                box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.13);
+                filter: blur(1px);
+            }
+            
+            
+            div.switch label:before
+            {
+                content: '';
+                position: absolute;
+                left: -20px;
+                right: -20px;
+                top: -20px;
+                bottom: -20px;
+                z-index: -2;
+                border-radius: inherit;
+                box-shadow:
+                    inset 0 1px 0 rgba(255,255,255,0.1),
+                    0 1px 2px rgba(0,0,0,0.3),
+                    0 0 10px rgba(0,0,0,0.15); 
+            }
+            
+            div.switch i
+            {
+                position:absolute;
+                content: '';
+                display: block;
+                z-index: -1;
+                border-radius: 50%;
+                width: 70%;
+                height: 70%;
+                left: 50%;
+                top: 50%;
+                margin: -35% 0 0 -35%;
+                box-shadow:
+                    0 -2px 3px rgba(0, 0, 0, 0.3),
+                    0 4px 3px rgba(0, 0, 0, 0.3);
+            }
+            
+            div.switch i:after
+            {
+                content: '';
+                position: absolute;
+                display: block;
+                width:50px;
+                height: 150px;
+                border-radius: 8px;
+                top:7%;
+                left: 36%;
+                box-shadow:
+                    0 3px 2px rgba(0, 0, 0, 0.3),
+                    0 -1px 2px rgba(0, 0, 0, 0.3);
+                background: linear-gradient(to bottom right, #F2FF9D 30%, #AACE55 90%);
+                transition: all 0.4s ease;
+            }
+            
+            div.switch input:checked ~label i:after
+            {
+                background: linear-gradient(to bottom right, #FF6C6C 30%, #FF1212 90%);
+                transform: rotate(90deg);
+                box-shadow:
+                    3px 0px 2px rgba(0, 0, 0, 0.3),
+                    -1px 0px 2px rgba(0, 0, 0, 0.3);
+                    
+            }
+            
+            #status
+            {
+                position: relative;
+                text-align: center;
+                top: 100px;
+                font-size: 20px;
+                padding: 16px 32px;
+                background-color: #AFE1FF;
+                border-radius: 10px;
+                box-shadow:
+                    0 5px 10px rgba(0, 0, 0, 0.16),
+                    0 2px 2px 1px rgba(0, 0, 0, 0.20);
+            }
+            
+            /* ---------------- navbar --------------*/
+            div.navbar
+            {
+                width: 100%;
+                background-color: #bbb;
+                text-align: center;
+                color: #242424;
+                box-shadow: 
+                    0 4px 4px rgba(0, 0, 0, 0.3),
+                    0 2px 2px rgba(0, 0, 0, 0.4);
+                font-size: 20px;
+            }
+            
+            div.navbar ul
+            {
+                list-style: none; 
+                padding: 14px 16px;
+                margin: 0px;
+            }
+            
+            div.navbar li
+            {
+                display: inline;
+            }
+            
+            div.navbar li a
+            {
+                float: left;
+            }
+            
+            div.navbar a
+            {
+                text-decoration: none;
+                color: #242424;
+            }
+                
+            div.navbar .fa
+            {
+                font-size: 28px;
+                margin-right: 15px;
+            }
+            
+            /* ---------------- responsive ----------------------*/
+            .row::after
+            {
+                content: '';
+                clear: both;
+                display: table;
+            }
+            
+            [class*='col-']
+            {
+                float: left;
+                padding: 15px;
+                width: 100%;
+            }
+            
+            /* For Tablet */
+            @media only screen and (min-width: 600px)
+            {
+                .col-m-1 {width: 8.33%;}
+                .col-m-2 {width: 16.66%;}
+                .col-m-3 {width: 25%;}
+                .col-m-4 {width: 33.33%;}
+                .col-m-5 {width: 41.66%;}
+                .col-m-6 {width: 50%;}
+                .col-m-7 {width: 58.33%;}
+                .col-m-8 {width: 66.66%;}
+                .col-m-9 {width: 75%;}
+                .col-m-10{width: 83.33%;}
+                .col-m-11{width: 91.66%;}
+                .col-m-12{width: 100%;}
+            }
+            
+            /* For Desktop */
+            @media only screen and (min-width: 768px)
+            {
+                .col-1 {width: 8.33%;}
+                .col-2 {width: 16.66%;}
+                .col-3 {width: 25%;}
+                .col-4 {width: 33.33%;}
+                .col-5 {width: 41.66%;}
+                .col-6 {width: 50%;}
+                .col-7 {width: 58.33%;}
+                .col-8 {width: 66.66%;}
+                .col-9 {width: 75%;}
+                .col-10{width: 83.33%;}
+                .col-11{width: 91.66%;}
+                .col-12{width: 100%;}
+            }
+        </style>
+        
+        <!-- jacascript -->
+        <script>
+            function myFunction()
+            {
+                var temp = document.getElementById('status').innerHTML;
+		var onoff = 'on';
+                
+                if(temp == '<b>가 스 ON</b>')
+                {
+                    temp = '<b>가 스 OFF</b>';
+                
+                    document.getElementById('status').innerHTML = temp;    
+                    onoff = 'off';
+                }
+                else
+                {
+                    temp = '<b>가 스 ON</b>';
+                    document.getElementById('status').innerHTML = temp;
+                    onoff = 'on';
+                }
+
+                var uri = "/gas/button?isChecked=" + onoff + "&userName=" + "jong" + "&status=" + "normal";
+                $.ajax({url: uri, dataType:'json', success: function(result){
+
+                }});
+            }
+        </script>
+    </body>
+</html>

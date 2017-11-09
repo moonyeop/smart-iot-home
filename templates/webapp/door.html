@@ -1,0 +1,312 @@
+<!doctype html>
+
+<html>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        
+        <!-- awesome icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <title>도어락</title>
+    </head>
+    
+    <body>
+        <div class='navbar'>
+            <ul>
+                <li><a href='/'><i class='fa fa-arrow-left'></i></a></li>
+                <li><a href='/'><i class='fa fa-home'></i></a></li>
+                <li id='title'><b>도어락 잠금 및 해제</b></li>
+            </ul>
+        </div>
+        
+        <div class='container'>
+            <div class='row'>
+                <div class='col-12 col-m-12'>
+                    <div class='box'>
+                        <input type='checkbox' onclick='myFunction()'>
+                        <label><i></i></label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class='row'>
+                <div class='col-3 col-m-2'>
+                </div>
+                
+                <div class='col-6 col-m-8'>
+                    <div id='status'>도어락이 설정되어있습니다.</div>
+                </div>
+                
+                <div class='col-3 col-m-2'>
+                </div>
+            </div>
+        </div>
+        
+        <!-- css -->
+        <style>
+            *, *:after, *:before {box-sizing: border-box;}
+            
+            body 
+            {
+                font-family: 'NanumGothic';
+                background-color: aliceblue;
+                overflow-x: hidden;
+                
+            }
+            
+            /* 문구 */
+            div#status
+            {
+                margin: 0px;
+                position: relative;
+                text-align: center;
+                top: 100px;
+                font-size: 20px;
+                padding: 16px 32px;
+                background-color: #AFE1FF;
+                border-radius: 10px;
+                box-shadow:
+                    0 5px 10px rgba(0, 0, 0, 0.16),
+                    0 2px 2px 1px rgba(0, 0, 0, 0.20);
+                font-weight: bold;
+                
+            }
+            
+            /* ---------------- doorlock---------------------*/
+            div.box
+            {
+                position: relative;
+                display: block;
+                width: 200px;
+                height: 350px;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            div.box input
+            {
+                position: absolute;
+                display: block;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                opacity: 0;
+                cursor: pointer;
+            }
+        
+            div.box label
+            {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 100%;
+                background-color: #6c2c10;  /* fall back */
+                background: linear-gradient(to bottom right, #6c2c10 20%, #512f23 70%);
+                z-index: -1;
+                border: 1px solid #361f17;
+                border-radius: 3px;
+                box-shadow:
+                    inset 0px 5px 5px rgba(0, 0, 0, 0.5),
+                    inset -5px 0px 5px rgba(0, 0, 0, 0.5),
+                    inset 5px 0px 5px rgba(0, 0, 0, 0.5),
+                    inset 0px -5px 5px rgba(0, 0, 0, 0.5);
+            }
+            
+            div.box label:after
+            {
+                content:'';
+                position: absolute;
+                top: -1px; right: -1px; bottom: -1px; left: -1px;
+                border-radius: 4px;
+                box-shadow: 0px 0px 1px 8px;
+                color: #361f17;
+            }
+            
+            div.box label:before
+            {
+                content: '';
+                position: absolute;
+                top: 60px; right: 40px; bottom: 60px; left: 40px;
+                box-shadow:
+                    inset 1px 0px 10px rgba(0, 0, 0, 0.5),
+                    inset -1px 0px 10px rgba(0, 0, 0, 0.5);
+                border-radius: 3px;
+            }
+            
+            div.box label i
+            {
+                position: absolute;
+                display: block;
+                content: '';
+                width: 25px;
+                height: 50px;
+                top: 50%;
+                left: 4%;
+                transform: translateY(-50%);
+                border-radius: 2px;
+                background-color: silver;   /* fall back*/
+                background: linear-gradient(to right, #e6e6e6 30%, #a6a6a6 90%);
+            }
+            
+            div.box label i:after
+            {
+                position: absolute;
+                content: '';
+                width: 30px;
+                height: 5px;
+                background: black;
+                background: linear-gradient(to right, #404040 20%, #1a1a1a 80%);
+                border-radius: 2px;
+                top: 60%;
+                left: 5px;
+                box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4),
+                    -1px 0px 1px rgba(0, 0, 0, 0.12);
+                filter: blur(0.5px);
+            }
+            
+            div.box label i:before
+            {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                top: 8px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #e60000;
+                box-shadow:
+                    0px 0px 3px 2px rgba(230, 0, 0, 0.4);
+                transition: all 0.1s ease;
+            }
+            
+            div.box input:checked ~ label i:before
+            {
+                
+                background-color: #00cc00;
+                box-shadow:
+                    0px 0px 3px 2px rgba(0, 204, 0, 0.4);
+            }
+            /* ---------------- navbar --------------*/
+            div.navbar
+            {
+                width: 100%;
+                background-color: #bbb;
+                text-align: center;
+                color: #242424;
+                box-shadow: 
+                    0 4px 4px rgba(0, 0, 0, 0.3),
+                    0 2px 2px rgba(0, 0, 0, 0.4);
+                font-size: 20px;
+            }
+            
+            div.navbar ul
+            {
+                list-style: none; 
+                padding: 14px 16px;
+                margin: 0px;
+            }
+            
+            div.navbar li
+            {
+                display: inline;
+            }
+            
+            div.navbar li a
+            {
+                float: left;
+            }
+            
+            div.navbar a
+            {
+                text-decoration: none;
+                color: #242424;
+            }
+                
+            div.navbar .fa
+            {
+                font-size: 28px;
+                margin-right: 15px;
+            }
+            
+            /* responsive wep */
+            
+             .row::after
+            {
+                content: '';
+                clear: both;
+                display: table;
+            }
+            
+            [class*='col-']
+            {
+                float: left;
+                padding: 15px;
+                width: 100%;
+            }
+            
+            /* For Tablet */
+            @media only screen and (min-width: 600px)
+            {
+                .col-m-1 {width: 8.33%;}
+                .col-m-2 {width: 16.66%;}
+                .col-m-3 {width: 25%;}
+                .col-m-4 {width: 33.33%;}
+                .col-m-5 {width: 41.66%;}
+                .col-m-6 {width: 50%;}
+                .col-m-7 {width: 58.33%;}
+                .col-m-8 {width: 66.66%;}
+                .col-m-9 {width: 75%;}
+                .col-m-10{width: 83.33%;}
+                .col-m-11{width: 91.66%;}
+                .col-m-12{width: 100%;}
+            }
+            
+            /* For Desktop */
+            @media only screen and (min-width: 768px)
+            {
+                .col-1 {width: 8.33%;}
+                .col-2 {width: 16.66%;}
+                .col-3 {width: 25%;}
+                .col-4 {width: 33.33%;}
+                .col-5 {width: 41.66%;}
+                .col-6 {width: 50%;}
+                .col-7 {width: 58.33%;}
+                .col-8 {width: 66.66%;}
+                .col-9 {width: 75%;}
+                .col-10{width: 83.33%;}
+                .col-11{width: 91.66%;}
+                .col-12{width: 100%;}
+            }
+        </style>
+        
+        <!-- javascript -->
+        <script>
+            function myFunction()
+            {
+                var temp = document.getElementById('status').innerHTML;
+                
+                
+                if(temp == '도어락이 설정되어있습니다.')
+                {
+                    temp = '도어락이 해제되었습니다.';
+                    
+                    document.getElementById('status').innerHTML = temp;
+                }
+                
+                else
+                {
+                    temp = '도어락이 설정되어있습니다.';
+                    
+                    document.getElementById('status').innerHTML = temp;
+                }
+            }
+            
+        </script>
+        
+    </body>
+</html>

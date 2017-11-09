@@ -1,0 +1,9 @@
+CREATE TABLE `log_lights` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(50) DEFAULT NULL,
+  `room_name` varchar(45) DEFAULT NULL,
+  `current_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `button` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+        <meta charset='utf-8'>
+        <title>Temperature Page</title>
+        
+        <!--css file link -->
+        <link rel='stylesheet' type='text/css' href='static/Temp.css'>
+
+	<script>
+	$(document).ready(function(){
+	    $("#tempbtn1").click(function(){
+		uri = "temperature?status=" + $("#tempbtn1").attr('name');
+		$.ajax({url: uri, success: function(result){
+		    alert(uri);
+		    alert(result);
+		    $("#tempbtn1").attr('name', result)
+		}});
+	    });
+	});
+	</script>
+
+    </head>
+    
+    <body>
+        <div class='board'>
+           
+            <div class='tempbox'>
+               
+                <form>
+                    <img class='tempbtn' id='tempbtn1' src='static/power_icon.png' name='ON'>
+		    
+                </form>
+                
+            </div>
+            
+        </div>
+    </body>
+</html>

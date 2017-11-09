@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js">
+	</script>
+        <meta charset='utf-8'>
+        <title>TEST GRAPH Page</title>
+        
+        <!--css file link 
+        <link rel='stylesheet' type='text/css' href='static/Temp.css'>
+	--> 
+    </head>
+
+    <body>
+	<meta id="time_list" data-time_list="{{ time_list }}">
+	<meta id="temperature_list" data-temperature_list="{{ temperature_list }}">
+	<div id="chart-container">
+	    <canvas id="myChart" width="10px" height="10px"></canvas>
+	</div>
+	<script>
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var time_list = $('#time_list').data("time_list");
+	var time_list = eval(time_list);
+	var temperature_list = $('#temperature_list').data("temperature_list");
+	var temperature_list = eval(temperature_list);
+
+
+	var chart = new Chart(ctx, {
+	    // The type of chart we want to create
+	    type: 'line',
+	    // The data for our dataset
+	    data: {
+		labels: time_list,
+
+		datasets: [{
+		    label: "jong",
+		    borderColor: 'rgb(255, 99, 132)',
+		    data: temperature_list
+		}]
+	    },
+
+	    // Configuration options go here
+	    options: {}
+	});
+	</script>
+
+    {% include 'admin/sidebar.html' %}
+
+    </body>
+
+</html>
+

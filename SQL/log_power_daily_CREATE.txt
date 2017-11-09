@@ -1,0 +1,10 @@
+CREATE TABLE `log_power_daily` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(50) DEFAULT NULL,
+  `year` int NOT NULL,
+  `month` int NOT NULL,
+  `day` int NOT NULL,	
+  `power` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>CSS Test</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
+        <style>
+            .main-border{
+                width:1080px;
+                height:1980px;
+                border : 3px solid black;
+                background-color: white;
+                
+            }
+            
+            .floating-box-l {
+                float : left;
+                width : 350px;
+                height : 350px;
+                margin : 70px 40px 150px 100px;
+                border : 0px solid royalblue;
+                border-radius: 20px;
+                text-align: center;
+                font-size : 20px;
+                background-color: #79ABFF;
+               
+            }
+            
+            .floating-box-r {
+                float : right;
+                width : 350px;
+                height : 350px;
+                margin : 70px 100px 150px 40px;
+                border : 0px solid royalblue;
+                border-radius: 20px;
+                text-align: center;
+                background-color: #79ABFF;
+            }
+            
+            div #main{
+                text-align: center;
+                font-size : 48px;
+                margin: 0 0 50px 0;
+            }
+            
+            div > p{
+                font-size: 28px;
+            }
+            
+            .fa-power-off {
+                font-size:48px;
+                color : #191919;
+                margin : 30px; 
+            }
+            
+            .fa-refresh{
+                float:right;
+                margin : 30px;
+                color : #191919;
+                font-size : 48px;
+            }         
+            
+            div .inside .fa{
+                float : left;
+                font-size : 80px;
+                margin : 70px 0 0 50px;
+            }
+            
+            div .inside p
+            {
+                float: right;
+                font-size : 50px;
+                margin : 70px 30px 0 0;
+            }
+            
+            div .inside .material-icons{
+                float: left;
+                font-size: 80px;
+                margin : 70px 0 0 50px;
+            }
+            
+            a{
+                text-decoration: none;
+            }
+            a:visited{
+                color:black;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class='main-border'>
+            <a href='#'>
+                <i class='fa fa-power-off'></i>
+                <i class='fa fa-refresh'></i>
+            </a>
+            <p id='main'>스마트미러 홈 IoT</p>
+            
+            <a href='/temperature'>
+                <div class='floating-box-l' id='temperature'>
+
+                    <p>온 도</p>
+                    <div class='inside'>
+                        <i class='fa fa-thermometer-2'></i>
+                        <p>28.6'C</p>
+                    </div>
+
+                </div>
+            </a>
+            
+            <a href='lights.html'>
+                <div class='floating-box-r'>
+                    <p>조 명</p>
+                    <div class='inside'>
+                        <i class='fa fa-lightbulb-o'></i>
+                        <p> 3/4 </p>
+                    </div>
+                </div>
+            </a>
+            
+            <a href='#'>
+                <div class='floating-box-l'>
+                    <p>가 스</p>
+                    <div class='inside'>
+                        <i class='fa fa-cloud'></i>
+                        <p> OFF </p>
+                    </div>
+                </div>
+            </a>
+            
+            <a href='#'>
+                <div class='floating-box-r'>
+                    <p>미 세 먼 지</p>
+                    <div class='inside'>
+                        <i class='fa fa-meh-o'></i>
+                        <p>34㎍/m³</p>
+                    </div>
+                </div>
+            </a>
+            
+            <a href='#'>
+                <div class='floating-box-l'>
+                    <p>문 잠 금</p>
+                    <div class='inside'>
+                        <i class='fa fa-lock'></i>
+                        <p> 잠겨있음 </p>
+                    </div>
+                </div>
+            </a>    
+        
+            <a href='#'>
+                <div class='floating-box-r'>
+                    <p>전 력 사 용 량</p>
+                    <div class='inside'>
+                        <i class='material-icons'>power</i>
+                        <p> 300kwh </p>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+    </body>
+</html>

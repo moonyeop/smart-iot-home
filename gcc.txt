@@ -1,0 +1,11 @@
+<wiringPi 설치>
+git clone git://git.drogon.net/wiringPi
+
+./build
+
+
+gcc -Wall -shared -Wl,-soname,fan -o fan.so -fPIC fan.c -lwiringPi -lwiringPiDev -lpthread -lm -lcrypt -lrt
+
+
+gcc -o fan.bin fan.c -lwiringPi -lpthread
+./fan.bin

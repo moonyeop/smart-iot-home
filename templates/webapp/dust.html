@@ -1,0 +1,345 @@
+<!doctype html>
+
+<html>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        
+        <!-- awesome icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <title>먼 지</title>
+    </head>
+    
+    <body>
+        <div class='navbar'>
+            <ul>
+                <li><a href='/'><i class='fa fa-arrow-left'></i></a></li>
+                <li><a href='/'><i class='fa fa-home'></i></a></li>
+                <li id='title'><b>먼지 및 공기청정기</b></li>
+            </ul>
+        </div>
+        
+        <div class='container'>
+            <div class='row'>
+                <div class='col-12 col-m-12'>
+                    <div class='btn'>
+                        <input type='checkbox'>
+                        <label><i class='fa fa-power-off'></i></label>
+                    </div>  
+                </div>
+            </div>
+            
+            <div class='row'>
+                <div class='col-1 col-m-0'>
+                </div>
+                
+                <div class='col-7 col-m-7'>
+                    <div id='table'>
+                        <ul>
+                            <li>0 - 30 : 좋 음</li>
+                            <li>31 - 80 : 보 통</li>
+                            <li>81 - 150 : 나 쁨</li>
+                            <li>151 - 999 : 매 우 나 쁨</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class='col-3 col-m-5'>
+                    <div id='current'>
+                        <p>현재 미세먼지량 : 24</p>
+                    </div>
+                </div>
+                
+                <div class='col-1 col-m-0'>
+                </div>
+            </div>
+        </div>
+        
+        <!-- css -->
+        <style>
+            *, *:after, *:before {box-sizing: border-box;}
+            body 
+            {
+                font-family: 'NanumGothic';
+                background-color: aliceblue;
+                overflow-x: hidden;
+                
+            }
+            
+            /*-----------------미세먼지 표 및 현재 미세먼지량----------------*/
+            div#table
+            {
+                position: relative;
+                top: 100px;
+                width: 100%;
+                height: 200px;
+                background-color: #7E7E7E;
+                border-radius: 6px;
+                box-shadow:
+                    0px 5px 10px rgba(0, 0, 0, 0.3),
+                    0px 2px 3px rgba(0, 0, 0, 0.4),
+                    inset 0px 4px 4px rgba(0, 0, 0, 0.2),
+                    inset -4px 0px 4px rgba(0, 0, 0, 0.2),
+                    inset 4px 0px 4px rgba(0, 0, 0, 0.2),
+                    inset 0px -4px 4px rgba(0, 0, 0, 0.2);
+            }
+            
+            div#table ul
+            {
+                list-style: none;
+                text-align: center;
+                line-height: 40px;
+                padding: 20px;
+                font-weight: bold;
+                font-size: 20px;
+            }
+            
+            div#table li:nth-child(1)
+            {
+                color: #1266FF;
+            }
+            
+            div#table li:nth-child(2)
+            {
+                color: #CFFF24;
+            }
+            
+            div#table li:nth-child(3)
+            {
+                color: #FF8224;
+            }
+            
+            div#table li:nth-child(4)
+            {
+                color: #FF3636;
+            }
+            
+            div#current
+            {
+                position: relative;
+                top: 100px;
+                width: 100%;
+                height: 200px;
+                background-color: #eaeaea;
+                border-radius: 6px;
+                box-shadow:
+                    0px 5px 10px rgba(0, 0, 0, 0.3),
+                    0px 2px 3px rgba(0, 0, 0, 0.4),
+                    inset 0px 4px 4px rgba(0, 0, 0, 0.2),
+                    inset -4px 0px 4px rgba(0, 0, 0, 0.2),
+                    inset 4px 0px 4px rgba(0, 0, 0, 0.2),
+                    inset 0px -4px 4px rgba(0, 0, 0, 0.2);
+            }
+            
+            div#current p
+            {
+                display: block;
+                position:relative;
+                font-weight: bold;
+                font-size: 20px;
+                text-align: center;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+            }
+             /* ----------------------- button --------------------- */   
+            div.btn
+            {
+                position: relative;
+                width: 250px;
+                height: 250px;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            div.btn input
+            {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 100;
+                cursor: pointer;
+                opacity: 0;
+                
+            }
+            
+            div.btn label
+            {
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: relative;
+                color: #a5a39d;
+                font-size: 70px;
+                text-align: center;
+                line-height: 250px;
+                text-shadow: 0 2px 1px rgba(0, 0, 0, 0.25);
+                border-radius: 50%;
+                background-color: #b25244; /* fall back */
+                background: linear-gradient(#f7f2f6, #b2ac9e);
+                transition: all 0.3s ease-out;
+                z-index: -1;
+                box-shadow:
+                    inset 0 2px 3px rgba(255, 255, 255, 0.13),
+                    0 5px 8px rgba(0, 0, 0, 0.3),
+                    0 10px 4px rgba(0, 0, 0, 0.3);
+            }
+            
+            div.btn label:before
+            {
+                content: '';
+                position: absolute;
+                left: -10px;
+                right: -10px;
+                top: -10px;
+                bottom: -10px;
+                z-index: -1;
+                border-radius: inherit;
+                box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.13);
+                filter: blur(1px);
+            }
+            
+            div.btn label:after
+            {
+                content: '';
+                position: absolute;
+                left: -20px;
+                right: -20px;
+                top: -20px;
+                bottom: -20px;
+                z-index: -2;
+                border-radius: inherit;
+                box-shadow:
+                    inset 0 1px 0 rgba(255,255,255,0.1),
+                    0 1px 2px rgba(0,0,0,0.3),
+                    0 0 10px rgba(0,0,0,0.15);  
+            }
+            
+            div.btn .fa-power-off:after
+            {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 70%;
+                height: 70%;
+                left: 50%;
+                top: 50%;
+                z-index: -1;
+                margin: -35% 0 0 -35%;
+                border-radius: 50%;
+                background-color: #d2cbc3; /* fall back */
+                background: linear-gradient(#cbc7bc, #d2cbc3);
+                box-shadow:
+                    0 -2px 5px rgba(255, 255, 255, 0.05),
+                    0 2px 5px rgba(255, 255, 255, 0.1);
+                filter: blur(1px);
+            }
+            
+            div.btn input:checked ~ label
+            {
+                color: #9abb82;
+                box-shadow:
+                    inset 0 2px 3px rgba(255, 255, 255, 0.13),
+                    0 5px 8px rgba(0, 0, 0, 0.35),
+                    0 3px 10px 4px rgba(0, 0, 0, 0.2);
+            }
+            
+        /* ---------------- navbar --------------*/
+            div.navbar
+            {
+                width: 100%;
+                background-color: #bbb;
+                text-align: center;
+                color: #242424;
+                box-shadow: 
+                    0 4px 4px rgba(0, 0, 0, 0.3),
+                    0 2px 2px rgba(0, 0, 0, 0.4);
+                font-size: 20px;
+            }
+            
+            div.navbar ul
+            {
+                list-style: none; 
+                padding: 14px 16px;
+                margin: 0px;
+            }
+            
+            div.navbar li
+            {
+                display: inline;
+            }
+            
+            div.navbar li a
+            {
+                float: left;
+            }
+            
+            div.navbar a
+            {
+                text-decoration: none;
+                color: #242424;
+            }
+                
+            div.navbar .fa
+            {
+                font-size: 28px;
+                margin-right: 15px;
+            }
+            
+             /* ---------------- responsive ----------------------*/
+            .row::after
+            {
+                content: '';
+                clear: both;
+                display: table;
+            }
+            
+            [class*='col-']
+            {
+                float: left;
+                padding: 15px;
+                width: 100%;
+            }
+            
+            /* For Tablet */
+            @media only screen and (min-width: 600px)
+            {
+                .col-m-1 {width: 8.33%;}
+                .col-m-2 {width: 16.66%;}
+                .col-m-3 {width: 25%;}
+                .col-m-4 {width: 33.33%;}
+                .col-m-5 {width: 41.66%;}
+                .col-m-6 {width: 50%;}
+                .col-m-7 {width: 58.33%;}
+                .col-m-8 {width: 66.66%;}
+                .col-m-9 {width: 75%;}
+                .col-m-10{width: 83.33%;}
+                .col-m-11{width: 91.66%;}
+                .col-m-12{width: 100%;}
+            }
+            
+            /* For Desktop */
+            @media only screen and (min-width: 768px)
+            {
+                .col-1 {width: 8.33%;}
+                .col-2 {width: 16.66%;}
+                .col-3 {width: 25%;}
+                .col-4 {width: 33.33%;}
+                .col-5 {width: 41.66%;}
+                .col-6 {width: 50%;}
+                .col-7 {width: 58.33%;}
+                .col-8 {width: 66.66%;}
+                .col-9 {width: 75%;}
+                .col-10{width: 83.33%;}
+                .col-11{width: 91.66%;}
+                .col-12{width: 100%;}
+            }
+        </style>
+        
+        <!-- javascript -->
+        <script>
+        </script>
+    </body>
+</html>

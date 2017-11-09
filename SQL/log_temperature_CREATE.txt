@@ -1,0 +1,11 @@
+CREATE TABLE `log_temperature` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(50) DEFAULT NULL,
+  `current_temperature` double DEFAULT NULL,
+  `want_temperature` double DEFAULT NULL,
+  `current_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `auto_mode` varchar(45) NOT NULL,
+  `button` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

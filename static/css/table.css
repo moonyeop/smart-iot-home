@@ -1,0 +1,42 @@
+table
+{
+    background-color: #284377;
+    border-radius:5px;
+    min-width: 400px;
+    width: 60%;
+    left: 50%;
+    display: table;
+    position: relative;
+    transform: translateX(-50%);
+    text-align: left;
+    font-weight: bold;
+    margin-top: 50px;
+    border-collapse: collapse;
+}
+
+tr
+{
+    transition: all 0.2s;
+}
+
+th
+{
+    color: #eaef62;
+}
+
+td
+{
+    color: #dddddd;
+}
+
+th, td
+{
+    padding: 10px 15px 10px 15px;
+    border: none;
+}
+
+tr:hover
+{
+    background-color: #517ec6;
+    transform: translate(5px 3px);
+}

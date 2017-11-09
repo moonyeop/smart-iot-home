@@ -1,0 +1,23 @@
+*, *:after, *:before
+{
+    box-sizing: border-box;
+}
+            
+.h
+{
+    text-align: center;
+    border-bottom: solid 3px #b7261f;
+    margin-bottom: 80px;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    position: relative;
+}
+
+#main
+{
+    margin-left: 250px;
+    padding: 16px;
+    transition: margin-left 0.5s;
+}

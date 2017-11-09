@@ -1,0 +1,691 @@
+<!doctype html>
+
+<html>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        
+        <!-- awesome icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        명
+        <title>조명</title>
+    </head>
+    
+    <body>
+        <div class='navbar'>
+            <ul>
+                <li><a href='/'><i class='fa fa-arrow-left'></i></a></li>
+                <li><a href='/'><i class='fa fa-home'></i></a></li>
+                <li id='title'><b>조 명</b></li>
+            </ul>
+        </div>
+        
+        <div class='row'>
+            <div class='col-8 col-m-12'>
+                <div class='house'>
+                    <div id='living'>
+                        <p class='big'>거실</p>
+                        <p class='small'>거실</p>
+                    </div>
+
+                    <div id='big'>
+                        <p class='big'>침실 1</p>
+                        <p class='small'>침실 1</p>
+                    </div>
+
+                    <div id='small'>
+                        <p class='big'>침실 2</p>
+                        <p class='small'>침실 2</p>
+                    </div>
+
+                    <div id='kitchen'>
+                        <i></i>
+                        <p class='big'>주방 /식당</p>
+                        <p class='small'>주방 /식당</p>
+                    </div>  
+                    
+                    <div id='bath'>
+                        <p class='big'>화장실</p>
+                        <p class='small'>화장실</p>
+                    </div>
+                    
+                    <div id='entrance'>
+                        <p class='big'>현관</p>
+                        <p class='small'>현관</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class='col-4'>
+                <div class='switchs'>
+                    <div class='switch'>
+                        <input type='checkbox' id='living1' onclick='living()'>
+                        <label><i></i></label>
+                        <p class='btn'>거 실</p>
+                    </div>
+                    
+                    <div class='switch'>
+                        <input type='checkbox' id='big1'>
+                        <label><i></i></label>
+                         <p class='btn'>침 실 1</p>
+                    </div>
+                    
+                    <div class='switch'>
+                        <input type='checkbox' id='small1'>
+                        <label><i></i></label>
+                         <p class='btn'>침 실 2</p>
+                    </div>
+                    
+                    <div class='switch'>
+                        <input type='checkbox' id='bath1'>
+                        <label><i></i></label>
+                         <p class='btn'>화 장 실</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- css -->
+        <style>
+           
+            
+             *, *:after, *:before {box-sizing: border-box;}
+            
+            body 
+            {
+                font-family: 'NanumGothic';
+                background-color: aliceblue;
+                overflow-x: hidden;
+               
+            }
+        
+         
+            /*--------------house----------------*/
+            @media only screen and (max-width:600px)
+            {
+                div.house p.big{
+                    color: rgba(0, 0, 0, 0);
+                    
+                }
+                
+                div.house p
+                {
+                    text-align: center;
+                    font-weight: bold;
+                }
+                 
+                #living p
+                {
+                margin: 80px 0 0 100px;
+                
+            }
+            
+            
+                #small p
+                {
+                    margin-top: 20px;
+                }
+
+                #bath p
+                {
+                    margin-top: 10px;
+                }
+
+                #entrance p
+                {
+                    bottom: 10px;
+                }
+
+                #kitchen p
+                {
+                    position: absolute;
+                    right: 50px;
+                    bottom: 1px;
+                }
+                
+                div.house
+                {
+                    position: relative;
+                    width: 250px;
+                    height: 400px;
+                    border: 2px solid;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #983C07;
+                    box-shadow:
+                    inset 0px 5px 5px rgba(0, 0, 0, 0.4),
+                    inset 3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset -3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset 0px -2px 5px rgba(0, 0, 0, 0.3);
+                    z-index: -1;
+                }
+                
+                div#living < div.house
+                {
+                    background: radial-gradient(#f57024 ,#983C07);
+                }
+                
+                div#big
+                {
+                    position: absolute;
+                    width: 120px;
+                    height: 150px;
+                    border:2px solid;
+                    bottom: 248px;
+                    left: -2px;
+                    background-color: #BC602B;
+                    box-shadow:
+                    inset 0px 5px 5px rgba(0, 0, 0, 0.4),
+                    inset 3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset -3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset 0px -2px 5px rgba(0, 0, 0, 0.15);
+                    z-index: 1;
+                    
+                }
+                
+                div#bath
+                {
+                    position: absolute;
+                    width: 80px;
+                    height: 114px;
+                    border: 2px solid;
+                    bottom: 136px;
+                    left: -2px;
+                    z-index: 1;
+                    box-shadow:
+                    inset 0px 5px 5px rgba(0, 0, 0, 0.4),
+                    inset 3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset -3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset 0px -2px 5px rgba(0, 0, 0, 0.15);
+                    background: #4375DB;
+                }
+                
+                div#small
+                {
+                    position: absolute;
+                    width: 100px;
+                    height: 140px;
+                    border: 2px solid;
+                    bottom: -2px;
+                    left: -2px;
+                    z-index: 1;
+                    box-shadow:
+                    inset 0px 5px 5px rgba(0, 0, 0, 0.4),
+                    inset 3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset -3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset 0px -2px 5px rgba(0, 0, 0, 0.15);
+                    background-color: #BC602B;
+                }
+                
+                div#entrance
+                {
+                    position: absolute;
+                    width: 40px;
+                    height: 40px;
+                    border: 2px solid;
+                    left: 96px;
+                    bottom: -2px;
+                    z-index: 1;
+                    box-shadow:
+                    inset 0px 2px 5px rgba(0, 0, 0, 0.4),
+                    inset 1px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset -1px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset 0px 0px 5px rgba(0, 0, 0, 0.15);
+                    background-color: silver;
+                }
+                
+                div#kitchen
+                {
+                    position: absolute;
+                    width: 40px;
+                    height: 80px;
+                    border: 2px solid;
+                    left: 208px;
+                    bottom: -2px;
+                    z-index: 1;
+                    box-shadow:
+                        inset 0px 2px 5px rgba(0, 0, 0, 0.4),
+                        inset -4px 0px 5px rgba(0, 0, 0, 0.3),
+                        inset 0px -2px 5px rgba(0, 0, 0, 0.3),
+                        inset 1px 0px 5px rgba(0, 0, 0, 0.15),
+                        -3px 0px 5px rgba(0, 0, 0, 0.7);
+                    background: linear-gradient(to bottom right, #e6e6e6 30%, #a6a6a6 90%);
+                    border-right: n
+                }
+                
+                div#kitchen i
+                {
+                display: block;
+                content= '';
+                position: relative;
+                width: 20px;
+                height: 30px;
+                box-shadow:
+                    inset 0 5px 5px rgba(0, 0, 0, 0.4),
+                    0 2px 1px 3px rgba(0, 0, 0, 0.2);
+                background: silver;
+                border-radius: 15px;
+                z-index: 0;
+                top: 6px;
+                left: 7px;
+            }
+            }
+            
+            /* ------------ switchs ------------------- */
+            p.btn
+            {
+                padding: 12px 16px;
+                font-weight: bold;
+
+            }
+            
+            div.switch input
+            {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 100;
+                cursor: pointer;
+                opacity: 0;
+            }
+            
+            div.switch
+            {
+                margin-top: 200px;
+                width: 250px;
+                height: 70px;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                margin-top: 30px;
+                margin-bottom: 80px;
+            }
+            
+            div.switch input
+            {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 100;
+                cursor: pointer;
+                opacity: 0;
+            }
+            
+            div.switch label
+            {
+                display: block;
+                width: 100%;
+                height: 100%;
+                position: relative;
+                background-color: #a5a39d;
+                border-radius: 40px;
+                box-shadow:
+                    inset 0 3px 8px 1px rgba(0, 0, 0, 0.2),
+                    0 1px 0 rgba(255, 255, 255, 0.5);
+                transition: all 0.5 ease;
+            }
+            
+            div.switch label:after 
+            {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                top: -8px; right: -8px; bottom: -8px; left: -8px;
+                border-radius: inherit;
+                background: #ccc; /* Fallback */
+                background: linear-gradient(#f2f2f2, #ababab);
+                box-shadow: 0 0 10px rgba(0,0,0,0.3),
+                    0 1px 1px rgba(0,0,0,0.25);
+            }
+            
+            div.switch label:before 
+            {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                top: -18px; right: -18px; bottom: -18px; left: -18px;
+                border-radius: inherit;
+                background: #eee; /* Fallback */
+                background: linear-gradient(#e5e7e6, #eee);
+                box-shadow: 0 1px 0 rgba(255,255,255,0.5);
+                -webkit-filter: blur(1px); /* Smooth trick */
+                filter: blur(1px); /* Future-proof */
+            }
+            
+            div.switch label i 
+            {
+                display: block;
+                height: 100%;
+                width: 60%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 2;
+                border-radius: inherit;
+                background: #b2ac9e; /* Fallback */
+                background: linear-gradient(#f7f2f6, #b2ac9e);
+                box-shadow:
+                    inset 0 1px 0 white,
+                    0 0 8px rgba(0,0,0,0.3),
+                    0 5px 5px rgba(0,0,0,0.2);
+            }
+            
+            div.switch label i:after 
+            {
+                content: "";
+                position: absolute;
+                left: 15%;
+                top: 25%;
+                width: 70%;
+                height: 50%;
+                background: #d2cbc3; /* Fallback */
+                background: linear-gradient(#cbc7bc, #d2cbc3);
+                border-radius: inherit;
+            }
+            
+            div.switch label i:before 
+            {
+                content: "off";
+                position: absolute;
+                top: 50%;
+                right: -50%;
+                margin-top: -12px;
+                color: #666; /* Fallback */
+                color: rgba(0,0,0,0.4);
+                font-style: normal;
+                font-weight: bold;
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 24px;
+                text-transform: uppercase;
+                text-shadow: 0 1px 0 #bcb8ae, 0 -1px 0 #97958e;
+            }
+            
+            div.switch input:checked ~ label 
+            { /* Background */
+                background: #9abb82;
+            }
+
+            div.switch input:checked ~ label i 
+            { /* Toggle */
+                left: auto;
+                right: -1%;
+            }
+
+            div.switch input:checked ~ label i:before 
+            { /* On/off */
+                content: "on";
+                right: 115%;
+                color: #82a06a;
+                text-shadow: 0 1px 0 #afcb9b, 0 -1px 0 #6b8659;
+            }
+            
+            div.switch p
+            {
+                text-align: center;
+                font-size: 16px
+            }
+            /* ---------------- navbar --------------*/
+            div.navbar
+            {
+                width: 100%;
+                background-color: #bbb;
+                text-align: center;
+                color: #242424;
+                box-shadow: 
+                    0 4px 4px rgba(0, 0, 0, 0.3),
+                    0 2px 2px rgba(0, 0, 0, 0.4);
+                font-size: 20px;
+            }
+            
+            div.navbar ul
+            {
+                list-style: none; 
+                padding: 14px 16px;
+                margin: 0px;
+            }
+            
+            div.navbar li
+            {
+                display: inline;
+            }
+            
+            div.navbar li a
+            {
+                float: left;
+            }
+            
+            div.navbar a
+            {
+                text-decoration: none;
+                color: #242424;
+            }
+                
+            div.navbar .fa
+            {
+                font-size: 28px;
+                margin-right: 15px;
+            }
+            
+            /* responsive wep */
+            
+             .row::after
+            {
+                content: '';
+                clear: both;
+                display: table;
+            }
+            
+            [class*='col-']
+            {
+                float: left;
+                padding: 15px;
+                width: 100%;
+            }
+            
+            
+            
+            /* For Tablet */
+            @media only screen and (min-width: 600px)
+            {
+                .col-m-1 {width: 8.33%;}
+                .col-m-2 {width: 16.66%;}
+                .col-m-3 {width: 25%;}
+                .col-m-4 {width: 33.33%;}
+                .col-m-5 {width: 41.66%;}
+                .col-m-6 {width: 50%;}
+                .col-m-7 {width: 58.33%;}
+                .col-m-8 {width: 66.66%;}
+                .col-m-9 {width: 75%;}
+                .col-m-10{width: 83.33%;}
+                .col-m-11{width: 91.66%;}
+                .col-m-12{width: 100%;}
+            }
+            
+            /* For Desktop */
+            @media only screen and (min-width: 768px)
+            {
+                .col-1 {width: 8.33%;}
+                .col-2 {width: 16.66%;}
+                .col-3 {width: 25%;}
+                .col-4 {width: 33.33%;}
+                .col-5 {width: 41.66%;}
+                .col-6 {width: 50%;}
+                .col-7 {width: 58.33%;}
+                .col-8 {width: 66.66%;}
+                .col-9 {width: 75%;}
+                .col-10{width: 83.33%;}
+                .col-11{width: 91.66%;}
+                .col-12{width: 100%;}
+                
+                 div.house p
+            {
+                text-align: center;
+                font-weight: bold;
+            }
+                
+                div.house p.small
+                {
+                    color: rgba(0, 0, 0, 0);
+                }
+            
+            #living p
+            {
+                margin-top: 120px;
+                
+            }
+            
+            #big p
+            {
+                margin-top: 100px;
+            }
+            
+            #small p
+            {
+                margin-top: 80px;
+            }
+            
+            #bath p
+            {
+                margin-top: 70px;
+            }
+            
+            #entrance p
+            {
+                margin-top: 30px;
+            }
+            
+            #kitchen p
+            {
+                margin-top: 30px;
+            }
+            
+            div#living
+            {
+                position: absolute;
+                width: 600px;
+                height: 300px;
+                border: 3px solid;
+                z-index: 0;
+                background: #983C07;
+                box-shadow:
+                    inset 0px 5px 5px rgba(0, 0, 0, 0.4),
+                    inset 3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset -3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset 0px -2px 5px rgba(0, 0, 0, 0.3);
+            }
+            
+            div#big
+            {
+                position: absolute;
+                width: 250px;
+                height: 230px;
+                z-index: 1;
+                background-color: #BC602B;
+                top: 300px;
+                border: 3px solid;
+                box-shadow:
+                    inset 0px 5px 5px rgba(0, 0, 0, 0.4),
+                    inset 3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset -3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset 0px -2px 5px rgba(0, 0, 0, 0.15);
+            }
+            
+            div#small
+            {
+                position: absolute;
+                width: 220px;
+                height: 190px;
+                z-index: 1;
+                background-color: #BC602B;
+                top: 340px;
+                left: 403px;
+                border: 3px solid;
+                box-shadow:
+                    inset 0px 5px 5px rgba(0, 0, 0, 0.4),
+                    inset 3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset -3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset 0px -2px 5px rgba(0, 0, 0, 0.15);
+            }
+            
+            div#entrance
+            {
+                position: absolute;
+                width: 80px;
+                height: 80px;
+                background-color: silver;
+                top: 260px;
+                left: 540px;
+                border-left: 1px solid;
+                border-top: 1px solid;
+                box-shadow:
+                    inset 0px 2px 5px rgba(0, 0, 0, 0.4),
+                    inset 1px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset -1px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset 0px 0px 5px rgba(0, 0, 0, 0.15);
+            }
+            
+            div#bath
+            {
+                position: absolute;
+                width: 130px;
+                height: 156px;
+                background: #4375DB;
+                left: 273px;
+                top: 374px;
+                border-bottom: 3px solid;
+                box-shadow:
+                    inset 0px 5px 5px rgba(0, 0, 0, 0.4),
+                    inset 3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset -3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset 0px -2px 5px rgba(0, 0, 0, 0.15);
+            }
+            
+            div#kitchen
+            {
+                position: absolute;
+                width: 150px;
+                height: 50px;
+                border: 1px solid;
+                border-radius: 4px;
+                left: 473px;
+                background: linear-gradient(to bottom right, #e6e6e6 30%, #a6a6a6 90%);
+                z-index: 1;
+                border-top: 3px solid;
+                border-right: 3px solid;
+                box-shadow:
+                    inset 0px 5px 5px rgba(0, 0, 0, 0.4),
+                    inset 3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset -3px 0px 5px rgba(0, 0, 0, 0.3),
+                    inset 0px -2px 5px rgba(0, 0, 0, 0.15),
+                    0px 5px 10px rgba(0, 0, 0, 0.7);
+            }
+            
+            div#kitchen i
+            {
+                display: block;
+                content= '';
+                position: relative;
+                width: 50px;
+                height: 30px;
+                box-shadow:
+                    inset 0 5px 5px rgba(0, 0, 0, 0.4),
+                    0 2px 1px 3px rgba(0, 0, 0, 0.2);
+                background: silver;
+                border-radius: 15px;
+                z-index: 0;
+                top: 6px;
+                left: 10px;
+            }
+            }
+        </style>
+        
+        <!-- javascript -->
+        <script>
+            function living()
+            {
+                var temp = document.getElementById('living1').appendChecked
+            }
+        </script>
+    </body>
+</html>

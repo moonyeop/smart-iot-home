@@ -1,0 +1,7 @@
+pip install flask
+pip install PyMySQL
+pip install apscheduler
+sudo apt-get install mysql-server
+sudo apt-get install mysql-workbench
+pip install flask-restful
+
