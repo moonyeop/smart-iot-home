@@ -27,11 +27,31 @@
 #### 라즈베리파이에서 서버를 구동하였고 IoT 센서가 부착된 아두이노 보드와 통신하여 데이터를 가져오고 센서를 제어하였다. 
 
 - 각 기능별 설명
->- **temperature** : zigbee 통신으로 
+>- **temperature** : zigbee 통신으로 온도 센서 및 팬을 제어한다. zigbee통신 및 제어 코드는 **fan.c** 에 있다
+'''python
+    # fan.c 코드를 컴파일한 파일인 fan.so를 이용하여 접근.
+    fan = CDLL('./fan.so')
+    
+    fan.controlFan.argtype = charptr
+    buf = create_string_buffer(256)
+    # controlFan 이라는 함수를 호출하여 팬을 동작시킨다
+    result = fan.controlFan(buf, status_code) 
+'''
 
->- **gas** : 
+>- **gas** : 온도 센서 제어와 마찬가지로 zigbee통신으로 가스 밸브를 제어한다 
+'''python
+    # gas.c 코드를 컴파일한 파일인 gas.so를 이용하여 접근.
+    gas_ = CDLL('./gas.so')
+    
+    if (is_checked == "on"):
+        button_onoff = 'ON'
+        result = gas_.gas_open()
+    else:
+        button_onoff = 'OFF'
+        result = gas_.gas_close()
+'''
 
->- **door** : 
+>- **door** : 우리가 진행한 웹앱에 잘 호환이 되지 않아 안드로이드 앱에서 BLE통신으로 제어함.
 
->- **power** :
+>- **power** : DB에 가상으로 입력한 일/월별 전력량 데이터를 가져와서 전달
 
